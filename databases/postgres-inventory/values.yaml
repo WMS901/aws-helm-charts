@@ -12,6 +12,5 @@ auth:
 
 persistence:
   enabled: true
-  existingClaim: "postgres-inventory-pvc"
-  storageClass: "nfs-storage"
-  size: 10Gi
+  storageClass: "gp2"   # AWS에서 동작하는 StorageClass (클러스터에 따라 gp2도 가능)
+  size: 20Gi
