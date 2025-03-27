@@ -4,12 +4,10 @@ metadata:
   name: postgres-user-pv
 spec:
   capacity:
-    storage: 10Gi
+    storage: 20Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs-storage
-  nfs:
-    path: /database/postgres-user
-    server: 195.168.9.123
-
+  awsElasticBlockStore:
+    volumeID: vol-0fbd3fc802bc4d5fd
+    fsType: ext4

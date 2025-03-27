@@ -1,24 +1,38 @@
-postgresql:
-  database: "user_db"
-  username: "user1"
-  password: "user1"
+global:
+  storageClass: ""
 
-storage:
-  size: 1Gi
+fullnameOverride: postgres-user
+
+architecture: standalone
+
+auth:
+  enablePostgresUser: true
+  postgresPassword: soldesk
+  username: user1
+  password: user1
+  database: user_db
+
+primary:
+  persistence:
+    enabled: true
+    existingClaim: postgres-user-pvc
+    storageClass: ""
+    size: 20Gi
+  
+  containerPorts:
+    postgresql: 5433
+  
+  extendedConfiguration: |
+    port = 5433
+
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 250m
+    limits:
+      memory: 1Gi
+      cpu: 500m
 
 service:
   type: ClusterIP
-  name: postgres-user
   port: 5433
-
-serviceAccount:
-  create: true
-
-ingress:
-  enabled: false
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 80

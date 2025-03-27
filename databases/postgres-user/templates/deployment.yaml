@@ -1,37 +1,42 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres-user
+  name: {{ .Release.Name }}
 spec:
-  serviceName: postgres-user
+  serviceName: {{ .Release.Name }}
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-user
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: postgres-user
+        app: {{ .Release.Name }}
     spec:
       containers:
-      - name: postgres
-        image: postgres:15
-        ports:
-        - containerPort: 5433
-        env:
-        - name: POSTGRES_DB
-          value: "{{ .Values.postgresql.database }}"
-        - name: POSTGRES_USER
-          value: "{{ .Values.postgresql.username }}"
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-user-secret
-              key: postgres-password
-        volumeMounts:
-        - name: postgres-storage
-          mountPath: /var/lib/postgresql/data
-      volumes:
-      - name: postgres-storage
-        persistentVolumeClaim:
-          claimName: postgres-user-pvc
+        - name: postgres
+          image: postgres:15
+          ports:
+            - containerPort: 5433
+          env:
+            - name: POSTGRES_DB
+              value: {{ .Values.auth.database | quote }}
+            - name: POSTGRES_USER
+              value: {{ .Values.auth.username | quote }}
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: postgres-password
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.primary.persistence.size | default "20Gi" | quote }}
+        storageClassName: {{ .Values.primary.persistence.storageClass | quote }}
