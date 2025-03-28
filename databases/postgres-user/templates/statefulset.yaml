@@ -20,6 +20,7 @@ spec:
           image: postgres:15
           ports:
             - containerPort: 5433
+          command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
           env:
             - name: POSTGRES_DB
               value: {{ .Values.auth.database | quote }}
@@ -34,6 +35,13 @@ spec:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
               subPath: postgres
+            - name: config
+              mountPath: /etc/postgresql/postgresql.conf
+              subPath: postgresql.conf
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Release.Name }}-config
   volumeClaimTemplates:
     - metadata:
         name: postgres-storage
