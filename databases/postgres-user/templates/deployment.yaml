@@ -29,14 +29,9 @@ spec:
                   name: {{ .Release.Name }}-secret
                   key: postgres-password
           volumeMounts:
-            - name: data
+            - name: existing-pvc
               mountPath: /var/lib/postgresql/data
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        resources:
-          requests:
-            storage: {{ .Values.primary.persistence.size | default "20Gi" | quote }}
-        storageClassName: {{ .Values.primary.persistence.storageClass | quote }}
+      volumes:
+        - name: existing-pvc
+          persistentVolumeClaim:
+            claimName: postgres-user-pvc

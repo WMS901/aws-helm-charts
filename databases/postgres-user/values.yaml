@@ -15,7 +15,6 @@ auth:
 primary:
   persistence:
     enabled: true
-    existingClaim: postgres-user-pvc
     storageClass: ""
     size: 20Gi
   
