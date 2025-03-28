@@ -4,6 +4,6 @@ metadata:
   name: {{ .Release.Name }}-config
 data:
   postgresql.conf: |
-    port = {{ .Values.postgresql.port | default 5432 }}
+    port = {{ .Values.primary.containerPorts.postgresql }}
     max_connections = 100
     shared_buffers = 128MB
