@@ -14,7 +14,7 @@ auth:
 
 primary:
   persistence:
-    enabled: true
+    enabled: false
     storageClass: ""
     size: 20Gi
   
