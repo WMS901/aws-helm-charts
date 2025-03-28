@@ -31,6 +31,7 @@ spec:
           volumeMounts:
             - name: existing-pvc
               mountPath: /var/lib/postgresql/data
+              subPath: postgres
       volumes:
         - name: existing-pvc
           persistentVolumeClaim:
