@@ -41,7 +41,7 @@ spec:
             - "config_file=/etc/postgresql/postgresql.conf"
           volumeMounts:
             - name: data-storage
-              mountPath: /var/lib/postgresql/data/postgres
+              mountPath: /var/lib/postgresql/data
             - name: config
               mountPath: /etc/postgresql/postgresql.conf
               subPath: postgresql.conf
