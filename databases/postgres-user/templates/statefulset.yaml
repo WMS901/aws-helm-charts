@@ -14,7 +14,7 @@ spec:
         app: {{ .Release.Name }}
     spec:
       securityContext:
-        fsGroup: 999  # postgres 이미지에서 권장되는 그룹 ID
+        fsGroup: 999
       containers:
         - name: postgres
           image: postgres:15
