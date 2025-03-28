@@ -35,7 +35,6 @@ spec:
           volumeMounts:
             - name: existing-pvc
               mountPath: /var/lib/postgresql/data
-              subPath: postgres
             - name: config
               mountPath: /etc/postgresql/postgresql.conf
               subPath: postgresql.conf
