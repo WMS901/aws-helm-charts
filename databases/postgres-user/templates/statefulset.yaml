@@ -33,7 +33,13 @@ spec:
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
-      volumes:
-        - name: postgres-storage
-          persistentVolumeClaim:
-            claimName: postgres-user-pvc
+              subPath: postgres
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: ebs-sc
+        resources:
+          requests:
+            storage: 20Gi
