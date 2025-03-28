@@ -14,7 +14,6 @@ spec:
         app: {{ .Release.Name }}
     spec:
       securityContext:
-        runAsUser: 999
         fsGroup: 999
       containers:
         - name: postgres
@@ -35,6 +34,7 @@ spec:
           volumeMounts:
             - name: existing-pvc
               mountPath: /var/lib/postgresql/data
+              #subPath: postgres
             - name: config
               mountPath: /etc/postgresql/postgresql.conf
               subPath: postgresql.conf
