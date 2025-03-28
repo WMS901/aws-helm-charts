@@ -14,7 +14,7 @@ spec:
         app: {{ .Release.Name }}
     spec:
       securityContext:
-        fsGroup: 999
+        fsGroup: 999  # postgres 이미지에서 권장되는 그룹 ID
       containers:
         - name: postgres
           image: postgres:15
@@ -38,6 +38,7 @@ spec:
         name: postgres-storage
       spec:
         accessModes: ["ReadWriteOnce"]
+        storageClassName: ebs-sc
         resources:
           requests:
             storage: 20Gi
