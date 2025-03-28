@@ -17,6 +17,7 @@ spec:
       containers:
         - name: inventory-service
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
           env:
@@ -30,7 +31,7 @@ spec:
               value: "{{ .Values.env.DB_PASSWORD }}"
             - name: DB_DRIVER
               value: "{{ .Values.env.DB_DRIVER }}"
-            # Kafka 환경 변수 추가
+            # Kafka 환경 변수
             - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
               value: "{{ .Values.env.SPRING_KAFKA_BOOTSTRAP_SERVERS }}"
             - name: SPRING_KAFKA_CONSUMER_GROUP_ID
@@ -43,4 +44,14 @@ spec:
               value: "{{ .Values.env.SPRING_KAFKA_CONSUMER_VALUE_DESERIALIZER }}"
             - name: SPRING_KAFKA_CONSUMER_PROPERTIES_SPRING_JSON_TRUSTED_PACKAGES
               value: "{{ .Values.env.SPRING_KAFKA_CONSUMER_PROPERTIES_SPRING_JSON_TRUSTED_PACKAGES }}"
+            - name: SPRING_KAFKA_PRODUCER_KEY_SERIALIZER
+              value: "{{ .Values.env.SPRING_KAFKA_PRODUCER_KEY_SERIALIZER }}"
+            - name: SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER
+              value: "{{ .Values.env.SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER }}"
+            - name: SPRING_KAFKA_PRODUCER_ACKS
+              value: "{{ .Values.env.SPRING_KAFKA_PRODUCER_ACKS }}"
+            - name: SPRING_KAFKA_TOPIC_INVENTORY_UPDATED
+              value: "{{ .Values.env.SPRING_KAFKA_TOPIC_INVENTORY_UPDATED }}"
+            - name: SPRING_KAFKA_TOPIC_INBOUND_CONFIRMED
+              value: "{{ .Values.env.SPRING_KAFKA_TOPIC_INBOUND_CONFIRMED }}"
 
