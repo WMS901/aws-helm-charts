@@ -30,6 +30,8 @@ spec:
                 secretKeyRef:
                   name: postgres-user-secret
                   key: postgres-password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/postgres
           securityContext:
             runAsUser: 999
             runAsGroup: 999
@@ -39,7 +41,7 @@ spec:
             - "config_file=/etc/postgresql/postgresql.conf"
           volumeMounts:
             - name: data-storage
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql/data/postgres
             - name: config
               mountPath: /etc/postgresql/postgresql.conf
               subPath: postgresql.conf
