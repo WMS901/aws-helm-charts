@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Release.Name }}
+  name: postgres-user
 spec:
-  serviceName: {{ .Release.Name }}
+  serviceName: postgres-user
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: postgres-user
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        app: postgres-user
     spec:
       securityContext:
         fsGroup: 999
@@ -20,34 +20,36 @@ spec:
           image: postgres:15
           ports:
             - containerPort: 5433
-          command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
           env:
             - name: POSTGRES_DB
-              value: {{ .Values.auth.database | quote }}
+              value: "user_db"
             - name: POSTGRES_USER
-              value: {{ .Values.auth.username | quote }}
+              value: "user1"
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: postgres-user-secret
                   key: postgres-password
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+            allowPrivilegeEscalation: false
+          args:
+            - "-c"
+            - "config_file=/etc/postgresql/postgresql.conf"
           volumeMounts:
-            - name: postgres-storage
+            - name: data-storage
               mountPath: /var/lib/postgresql/data
-              subPath: postgres
             - name: config
               mountPath: /etc/postgresql/postgresql.conf
               subPath: postgresql.conf
       volumes:
+        - name: data-storage
+          persistentVolumeClaim:
+            claimName: postgres-user-pvc
         - name: config
           configMap:
-            name: {{ .Release.Name }}-config
-  volumeClaimTemplates:
-    - metadata:
-        name: postgres-storage
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: ebs-sc
-        resources:
-          requests:
-            storage: 20Gi
+            name: postgres-config
+            items:
+              - key: postgresql.conf
+                path: postgresql.conf

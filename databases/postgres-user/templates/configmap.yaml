@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-config
+  name: postgres-config
+  namespace: postgres
 data:
   postgresql.conf: |
-    port = {{ .Values.primary.containerPorts.postgresql }}
+    port = 5433
     max_connections = 100
     shared_buffers = 128MB
