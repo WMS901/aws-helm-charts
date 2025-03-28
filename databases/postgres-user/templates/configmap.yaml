@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-user-config
+data:
+  postgresql.conf: |
+    port = 5433
