@@ -1,75 +1,46 @@
 apiVersion: v1
 entries:
+  mongo-inbound:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-03-28T01:27:05.821499078Z"
+    description: A Helm chart for MongoDB (Inbound Database)
+    digest: a869b3b9303c3cbff0ddd6319c229cce01457324bcca4e11de207daabfcde70b
+    name: mongo-inbound
+    type: application
+    urls:
+    - https://wms901.github.io/aws-helm-charts/databases/mongo-inbound-0.1.0.tgz
+    version: 0.1.0
   mongo-outbound:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-03-25T20:35:29.2161699+09:00"
+    created: "2025-03-28T01:27:05.82177934Z"
     description: A Helm chart for MongoDB (Outbound Database)
     digest: 7365ba5724bb38df476836d494ccae9f487ddfdf5b501d2ef6014d92383f798c
     name: mongo-outbound
     type: application
     urls:
-    - https://bazzyungs.github.io/aws-helm-charts/databases/mongo-outbound-0.1.0.tgz
+    - https://wms901.github.io/aws-helm-charts/databases/mongo-outbound-0.1.0.tgz
     version: 0.1.0
   postgres-inventory:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-03-25T20:35:29.216843+09:00"
+    created: "2025-03-28T01:27:05.821977364Z"
     description: A Helm chart for Kubernetes
     digest: a03300661355beadec709eced6d855aa839874a7ca1c962c9701499e8a9d716e
     name: postgres-inventory
     type: application
     urls:
-    - https://bazzyungs.github.io/aws-helm-charts/databases/postgres-inventory-0.1.0.tgz
+    - https://wms901.github.io/aws-helm-charts/databases/postgres-inventory-0.1.0.tgz
     version: 0.1.0
   postgres-user:
   - apiVersion: v2
     appVersion: "15"
-    created: "2025-03-25T20:35:29.216843+09:00"
-    description: A Helm chart for PostgreSQL user database
-    digest: bbca059a5990e1284d585fbc809916c4333638ca95558174bfb8d434c7d751f3
+    created: "2025-03-28T01:27:05.822201254Z"
+    description: A Helm chart for PostgreSQL for User Database on EKS
+    digest: e8f7c3dd2da4810ccfe47eb549810ec52d257dc359e70725b5a94c1b417df88c
     name: postgres-user
     urls:
-    - https://bazzyungs.github.io/aws-helm-charts/databases/postgres-user-1.0.0.tgz
+    - https://wms901.github.io/aws-helm-charts/databases/postgres-user-1.0.0.tgz
     version: 1.0.0
-  redis-cluster:
-  - annotations:
-      category: Database
-      images: |
-        - name: os-shell
-          image: docker.io/bitnami/os-shell:12-debian-12-r38
-        - name: redis-cluster
-          image: docker.io/bitnami/redis-cluster:7.4.2-debian-12-r4
-        - name: redis-exporter
-          image: docker.io/bitnami/redis-exporter:1.67.0-debian-12-r8
-      licenses: Apache-2.0
-      tanzuCategory: service
-    apiVersion: v2
-    appVersion: 7.4.2
-    created: "2025-03-25T20:35:29.2263512+09:00"
-    dependencies:
-    - name: common
-      repository: oci://registry-1.docker.io/bitnamicharts
-      tags:
-      - bitnami-common
-      version: 2.x.x
-    description: Redis(R) is an open source, scalable, distributed in-memory cache
-      for applications. It can be used to store and serve data in the form of strings,
-      hashes, lists, sets and sorted sets.
-    digest: 6b04ac8f0bdb9cafeb63e37bce2987dcaeb5d245c3aa06ae5400b9b0672afb93
-    home: https://bitnami.com
-    icon: https://dyltqmyl993wv.cloudfront.net/assets/stacks/redis/img/redis-stack-220x234.png
-    keywords:
-    - redis
-    - keyvalue
-    - database
-    maintainers:
-    - name: Broadcom, Inc. All Rights Reserved.
-      url: https://github.com/bitnami/charts
-    name: redis-cluster
-    sources:
-    - https://github.com/bitnami/charts/tree/main/bitnami/redis-cluster
-    urls:
-    - https://bazzyungs.github.io/aws-helm-charts/databases/redis-cluster-ddd/redis-cluster-11.4.5.tgz
-    version: 11.4.5
-generated: "2025-03-25T20:35:29.2156602+09:00"
+generated: "2025-03-28T01:27:05.82118251Z"
