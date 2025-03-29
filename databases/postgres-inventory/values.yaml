@@ -1,16 +1,34 @@
-replicaCount: 1
+global:
+  storageClass: ""
 
-image:
-  repository: postgres
-  tag: "15"
-  pullPolicy: IfNotPresent
+fullnameOverride: postgres-inventory
+
+architecture: standalone
 
 auth:
-  username: "user1"
-  password: "user1"
-  database: "inventory_db"
+  enablePostgresUser: true
+  postgresPassword: soldesk
+  username: user1
+  password: user1
+  database: inventory_db
 
-persistence:
-  enabled: true
-  storageClass: "gp2"   # AWS에서 동작하는 StorageClass (클러스터에 따라 gp2도 가능)
-  size: 20Gi
+primary:
+  persistence:
+    enabled: false
+    storageClass: ""
+    size: 20Gi
+  
+  containerPorts:
+    postgresql: 5432
+
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 250m
+    limits:
+      memory: 1Gi
+      cpu: 500m
+
+service:
+  type: ClusterIP
+  port: 5432
