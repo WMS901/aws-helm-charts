@@ -8,7 +8,7 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/group.name: wms-group
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:816069155414:certificate/351928dd-5494-...
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:816069155414:certificate/351928dd-5494-423c-bd06-36b852d30c57
     alb.ingress.kubernetes.io/backend-protocol: HTTP
 spec:
   ingressClassName: alb
