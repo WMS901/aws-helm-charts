@@ -10,7 +10,7 @@ auth:
   postgresPassword: soldesk
   username: user1
   password: user1
-  database: inventory_db
+  database: wms_inventory
 
 primary:
   persistence:
