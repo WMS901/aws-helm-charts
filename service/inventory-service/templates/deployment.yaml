@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
+  namespace: wms
   labels:
     app: {{ .Release.Name }}
 spec:
@@ -15,7 +16,7 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-        - name: inventory-service
+        - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:

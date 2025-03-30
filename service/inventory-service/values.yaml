@@ -8,6 +8,7 @@ image:
 service:
   type: ClusterIP
   port: 1040
+  targetPort: 1040
 
 env:
   SERVER_PORT: 1040
@@ -26,3 +27,4 @@ env:
   SPRING_KAFKA_TOPIC_INVENTORY_UPDATED: "inventory-updated"
   SPRING_KAFKA_TOPIC_INBOUND_CONFIRMED: "inbound-confirmed-0"
   SPRING_KAFKA_PRODUCER_ACKS: "all"
+
