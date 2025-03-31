@@ -20,8 +20,8 @@ spec:
           ports:
             - containerPort: {{ .Values.service.port }}
           command:
-            - "mongod"
-            - "--port={{ .Values.service.port | quote }}"
+            - mongod
+            - "--port={{ .Values.service.port }}"
             - "--bind_ip_all"
             - "--auth"
           env:
