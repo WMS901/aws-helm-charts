@@ -15,10 +15,25 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-        - name: inbound-service
+        - name: outbound-service
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: {{ .Values.service.port }}
+          
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 15
+            periodSeconds: 20
+
           env:
             - name: SERVER_PORT
               value: "{{ .Values.env.SERVER_PORT }}"
