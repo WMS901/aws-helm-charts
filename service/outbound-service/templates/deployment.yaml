@@ -18,19 +18,20 @@ spec:
         - name: outbound-service
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
-            - containerPort: {{ .Values.service.port }}
+            - name: http
+              containerPort: {{ .Values.service.port }}
           
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: {{ .Values.service.port }}
+              port: http
             initialDelaySeconds: 5
             periodSeconds: 10
 
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: {{ .Values.service.port }}
+              port: http
             initialDelaySeconds: 15
             periodSeconds: 20
 
