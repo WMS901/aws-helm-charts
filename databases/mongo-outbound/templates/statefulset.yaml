@@ -19,6 +19,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
+          command:
+            - "mongod"
+            - "--port={{ .Values.service.port | quote }}"
+            - "--bind_ip_all"
+            - "--auth"
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               value: {{ .Values.env.MONGO_INITDB_ROOT_USERNAME | quote }}
