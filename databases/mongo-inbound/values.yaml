@@ -13,5 +13,4 @@ auth:
 persistence:
   enabled: true
   existingClaim: "mongo-inbound-pvc"
-  storageClass: "nfs-storage"
   size: 10Gi

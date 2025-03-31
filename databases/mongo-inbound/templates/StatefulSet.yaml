@@ -18,11 +18,11 @@ spec:
           image: mongo:6.0
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: "user1"
+              value: {{ .Values.auth.username | quote }}
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: "user1"
+              value: {{ .Values.auth.username | quote }}
             - name: MONGO_INITDB_DATABASE
-              value: "inbound_db"
+              value: {{ .Values.auth.database | quote }}
           ports:
             - containerPort: 27017
           volumeMounts:
