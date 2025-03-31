@@ -18,7 +18,7 @@ env:
   MONGO_DB: outbound_db
   MONGO_AUTH_DB: admin
 
-  SPRING_KAFKA_BOOTSTRAP_SERVERS: "my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092"
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: "kafka.kafka.svc.cluster.local:9092"
   SPRING_KAFKA_CONSUMER_GROUP_ID: "outbound-group"
   SPRING_KAFKA_CONSUMER_AUTO_OFFSET_RESET: "earliest"
   SPRING_KAFKA_CONSUMER_KEY_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"
