@@ -19,12 +19,16 @@ service:
 
 env:
   SERVER_PORT: 1050
-  MONGO_HOST: mongo-inbound.mongo.svc.cluster.local #ip -> DNS 기반 서비스 이름 사용
+
+  # MongoDB 연결 설정
+  MONGO_HOST: mongo-inbound.mongo.svc.cluster.local
   MONGO_PORT: 27017
   MONGO_USER: user1
   MONGO_PASS: user1
   MONGO_DB: inbound_db
   MONGO_AUTH_DB: admin
+
+  # Kafka 연결 설정
   SPRING_KAFKA_BOOTSTRAP_SERVERS: "kafka.kafka.svc.cluster.local:9092"
   SPRING_KAFKA_TOPIC_INBOUND_CREATED: "inbound-created"
   SPRING_KAFKA_TOPIC_INVENTORY_UPDATED: "inventory-updated"
