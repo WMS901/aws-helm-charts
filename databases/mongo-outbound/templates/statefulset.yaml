@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  serviceName: {{ .Release.Name }}
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: mongo
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: {{ .Values.env.MONGO_INITDB_ROOT_USERNAME | quote }}
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: {{ .Values.env.MONGO_INITDB_ROOT_PASSWORD | quote }}
+            - name: MONGO_INITDB_DATABASE
+              value: {{ .Values.env.MONGO_INITDB_DATABASE | quote }}
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-storage
+      spec:
+        accessModes: {{ .Values.persistence.accessModes }}
+        storageClassName: {{ .Values.persistence.storageClass | quote }}
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}
+        volumeName: {{ .Values.persistence.volumeName | quote }}

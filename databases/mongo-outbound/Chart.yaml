@@ -1,6 +1,6 @@
 apiVersion: v2
 name: mongo-outbound
-description: A Helm chart for MongoDB (Outbound Database)
+description: A Helm chart for MongoDB for Outbound Database on EKS
 type: application
-version: 0.1.0
+version: 1.0.0
 appVersion: "1.16.0"

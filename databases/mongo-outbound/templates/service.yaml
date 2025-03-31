@@ -1,15 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongo-outbound
-  labels:
-    app: mongo-outbound
+  name: {{ .Release.Name }}
 spec:
-  type: ClusterIP
+  type: {{ .Values.service.type }}
   selector:
-    app: mongo-outbound
+    app: {{ .Release.Name }}
   ports:
-    - protocol: TCP
-      port: 27018
-      targetPort: 27018
-
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}

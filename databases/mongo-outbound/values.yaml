@@ -7,13 +7,13 @@ image:
 
 service:
   type: ClusterIP
-  port: 27018  # ✅ 27018 포트 사용
+  port: 27018
 
 persistence:
   enabled: true
-  storageClass: "nfs-storage"
+  storageClass: ""
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   size: 10Gi
   volumeName: "mongo-outbound-pv"
 
@@ -29,10 +29,3 @@ resources:
   requests:
     cpu: 250m
     memory: 256Mi
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
-
