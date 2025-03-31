@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
+  namespace: wms
   labels:
     app: {{ .Release.Name }}
 spec:
@@ -15,8 +16,9 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-        - name: inbound-service
+        - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
           env:
@@ -34,4 +36,11 @@ spec:
               value: "{{ .Values.env.MONGO_DB }}"
             - name: MONGO_AUTH_DB
               value: "{{ .Values.env.MONGO_AUTH_DB }}"
-
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              value: "{{ .Values.env.SPRING_KAFKA_BOOTSTRAP_SERVERS }}"
+            - name: SPRING_KAFKA_TOPIC_INBOUND_CREATED
+              value: "{{ .Values.env.SPRING_KAFKA_TOPIC_INBOUND_CREATED }}"
+            - name: SPRING_KAFKA_TOPIC_INVENTORY_UPDATED
+              value: "{{ .Values.env.SPRING_KAFKA_TOPIC_INVENTORY_UPDATED }}"
+            - name: SPRING_KAFKA_CONSUMER_GROUP_ID
+              value: "{{ .Values.env.SPRING_KAFKA_CONSUMER_GROUP_ID }}"
