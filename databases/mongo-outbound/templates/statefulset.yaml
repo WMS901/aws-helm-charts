@@ -26,11 +26,11 @@ spec:
             - "--auth"
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: {{ .Values.env.MONGO_INITDB_ROOT_USERNAME | quote }}
+              value: {{ .Values.auth.username | quote }}
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: {{ .Values.env.MONGO_INITDB_ROOT_PASSWORD | quote }}
+              value: {{ .Values.auth.password | quote }}
             - name: MONGO_INITDB_DATABASE
-              value: {{ .Values.env.MONGO_INITDB_DATABASE | quote }}
+              value: {{ .Values.auth.database | quote }}
           volumeMounts:
             - name: mongo-storage
               mountPath: /data/db
