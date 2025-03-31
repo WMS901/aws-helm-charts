@@ -44,3 +44,12 @@ spec:
               value: "{{ .Values.env.SPRING_KAFKA_TOPIC_INVENTORY_UPDATED }}"
             - name: SPRING_KAFKA_CONSUMER_GROUP_ID
               value: "{{ .Values.env.SPRING_KAFKA_CONSUMER_GROUP_ID }}"
+          readinessProbe:
+            httpGet:
+              path: /api/inbound/actuator/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
