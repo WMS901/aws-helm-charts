@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  namespace: wms
   labels:
     app: {{ .Release.Name }}
 spec:
@@ -14,13 +13,29 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
-    spec:
+   spec:
       containers:
-        - name: {{ .Release.Name }}
+        - name: inbound-service
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.service.port }}
+            - name: http
+              containerPort: {{ .Values.service.port }}
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+
           env:
             - name: SERVER_PORT
               value: "{{ .Values.env.SERVER_PORT }}"
@@ -36,20 +51,4 @@ spec:
               value: "{{ .Values.env.MONGO_DB }}"
             - name: MONGO_AUTH_DB
               value: "{{ .Values.env.MONGO_AUTH_DB }}"
-            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-              value: "{{ .Values.env.SPRING_KAFKA_BOOTSTRAP_SERVERS }}"
-            - name: SPRING_KAFKA_TOPIC_INBOUND_CREATED
-              value: "{{ .Values.env.SPRING_KAFKA_TOPIC_INBOUND_CREATED }}"
-            - name: SPRING_KAFKA_TOPIC_INVENTORY_UPDATED
-              value: "{{ .Values.env.SPRING_KAFKA_TOPIC_INVENTORY_UPDATED }}"
-            - name: SPRING_KAFKA_CONSUMER_GROUP_ID
-              value: "{{ .Values.env.SPRING_KAFKA_CONSUMER_GROUP_ID }}"
-          readinessProbe:
-            httpGet:
-              path: /api/inbound/actuator/health
-              port: {{ .Values.service.port }}
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
+
