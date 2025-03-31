@@ -1,16 +1,26 @@
+apiVersion: v2
+name: inbound
+description: A Helm chart for Kubernetes
+type: application
+version: 1.0.0
+appVersion: "1.16.0"
+
 replicaCount: 1
 
 image:
   repository: chamchimayo/inbound-service
-  tag: "v10.0.11"
+  tag: "v10.0.10"
   pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
   port: 1050
+  targetPort: 1050
 
 env:
   SERVER_PORT: 1050
+
+  # MongoDB 연결 설정
   MONGO_HOST: mongo-inbound.mongo.svc.cluster.local
   MONGO_PORT: 27017
   MONGO_USER: user1
@@ -18,9 +28,8 @@ env:
   MONGO_DB: inbound_db
   MONGO_AUTH_DB: admin
 
+  # Kafka 연결 설정
   SPRING_KAFKA_BOOTSTRAP_SERVERS: "kafka.kafka.svc.cluster.local:9092"
+  SPRING_KAFKA_TOPIC_INBOUND_CREATED: "inbound-created"
+  SPRING_KAFKA_TOPIC_INVENTORY_UPDATED: "inventory-updated"
   SPRING_KAFKA_CONSUMER_GROUP_ID: "inbound-group"
-  SPRING_KAFKA_CONSUMER_AUTO_OFFSET_RESET: "earliest"
-  SPRING_KAFKA_CONSUMER_KEY_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"
-  SPRING_KAFKA_CONSUMER_VALUE_DESERIALIZER: "org.springframework.kafka.support.serializer.JsonDeserializer"
-  SPRING_KAFKA_CONSUMER_PROPERTIES_SPRING_JSON_TRUSTED_PACKAGES: "*"
