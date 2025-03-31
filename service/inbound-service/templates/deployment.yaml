@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
-   spec:
+    spec:
       containers:
         - name: inbound-service
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
