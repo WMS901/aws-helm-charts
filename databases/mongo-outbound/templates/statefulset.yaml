@@ -29,13 +29,7 @@ spec:
           volumeMounts:
             - name: mongo-storage
               mountPath: /data/db
-  volumeClaimTemplates:
-    - metadata:
-        name: mongo-storage
-      spec:
-        accessModes: {{ .Values.persistence.accessModes }}
-        storageClassName: {{ .Values.persistence.storageClass | quote }}
-        resources:
-          requests:
-            storage: {{ .Values.persistence.size }}
-        volumeName: {{ .Values.persistence.volumeName | quote }}
+      volumes:
+        - name: mongo-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | quote }}
