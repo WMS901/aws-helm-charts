@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: chamchimayo/inbound-service
-  tag: "v10.0.8"
+  tag: "v10.0.9"
   pullPolicy: IfNotPresent
 
 service:
@@ -19,8 +19,6 @@ env:
   MONGO_AUTH_DB: admin
 
   SPRING_KAFKA_BOOTSTRAP_SERVERS: "kafka.kafka.svc.cluster.local:9092"
-  SPRING_KAFKA_TOPIC_INBOUND_CREATED: "inbound-created"
-  SPRING_KAFKA_TOPIC_INVENTORY_UPDATED: "inventory-updated"
   SPRING_KAFKA_CONSUMER_GROUP_ID: "inbound-group"
   SPRING_KAFKA_CONSUMER_AUTO_OFFSET_RESET: "earliest"
   SPRING_KAFKA_CONSUMER_KEY_DESERIALIZER: "org.apache.kafka.common.serialization.StringDeserializer"
