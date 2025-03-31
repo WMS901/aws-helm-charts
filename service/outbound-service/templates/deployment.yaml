@@ -17,10 +17,11 @@ spec:
       containers:
         - name: outbound-service
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
-          
+
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -50,4 +51,3 @@ spec:
               value: "{{ .Values.env.MONGO_DB }}"
             - name: MONGO_AUTH_DB
               value: "{{ .Values.env.MONGO_AUTH_DB }}"
-
