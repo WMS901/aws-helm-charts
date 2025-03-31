@@ -3,29 +3,18 @@ entries:
   mongo-inbound:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-03-31T12:37:12.310411+09:00"
+    created: "2025-03-31T12:56:03.1243881+09:00"
     description: A Helm chart for MongoDB (Inbound Database)
-    digest: 44e4e9c625742abfeda3bb2aaadbcecfb2e0646767c5c1605cfd01c6e5424e7b
+    digest: aa413faadd85a712e340e95f09f4e5f7738aa7d7bc188ccfd5042a8a630164fc
     name: mongo-inbound
     type: application
     urls:
-    - https://wms901.github.io/aws-helm-charts/databases/mongo-inbound-0.1.0.tgz
-    version: 0.1.0
-  mongo-outbound:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2025-03-31T12:37:12.310411+09:00"
-    description: A Helm chart for MongoDB (Outbound Database)
-    digest: 7365ba5724bb38df476836d494ccae9f487ddfdf5b501d2ef6014d92383f798c
-    name: mongo-outbound
-    type: application
-    urls:
-    - https://wms901.github.io/aws-helm-charts/databases/mongo-outbound-0.1.0.tgz
-    version: 0.1.0
+    - https://wms901.github.io/aws-helm-charts/databases/mongo-inbound-1.0.0.tgz
+    version: 1.0.0
   postgres-inventory:
   - apiVersion: v2
     appVersion: "15"
-    created: "2025-03-31T12:37:12.310916+09:00"
+    created: "2025-03-31T12:56:03.1249272+09:00"
     description: A Helm chart for PostgreSQL for Inventory Database on EKS
     digest: 1aa5f20fba82af7b8bf08c69255f754a6723f7bc37368a2a163a34c20ded4f7f
     name: postgres-inventory
@@ -36,11 +25,11 @@ entries:
   postgres-user:
   - apiVersion: v2
     appVersion: "15"
-    created: "2025-03-31T12:37:12.310916+09:00"
+    created: "2025-03-31T12:56:03.1249272+09:00"
     description: A Helm chart for PostgreSQL for User Database on EKS
     digest: bdcdaa93473296091c55831160eaedc2c3ec67f8a73eeada546ba39251ee4971
     name: postgres-user
     urls:
     - https://wms901.github.io/aws-helm-charts/databases/postgres-user-1.0.0.tgz
     version: 1.0.0
-generated: "2025-03-31T12:37:12.3094115+09:00"
+generated: "2025-03-31T12:56:03.1243881+09:00"
