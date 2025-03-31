@@ -4,32 +4,29 @@ metadata:
   name: outbound-service-ingress
   namespace: wms
   annotations:
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-headers: "Authorization, Content-Type"
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-#    konghq.com/plugins: "jwt"
-#    nginx.ingress.kubernetes.io/enable-cors: "true"
-#    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-#    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/group.name: wms-group
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:816069155414:certificate/351928dd-5494-423c-bd06-36b852d30c57
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-path: /actuator/health
 spec:
-  ingressClassName: nginx
+  ingressClassName: alb
   tls:
   - hosts:
-      - api.sol-wms.store
-    secretName: letsencrypt-cert
+      - api.solcloud.store
+    secretName: tls-secret
   rules:
-  - host: api.sol-wms.store
+  - host: api.solcloud.store
     http:
       paths:
       - path: /api/outbound
         pathType: Prefix
         backend:
           service:
-            name: outbound-service
+            name: {{ .Release.Name }}
             port:
-              number: 1051
+              number: {{ .Values.service.port }}
 
 
