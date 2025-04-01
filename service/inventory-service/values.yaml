@@ -25,6 +25,7 @@ env:
   SPRING_KAFKA_PRODUCER_KEY_SERIALIZER: "org.apache.kafka.common.serialization.StringSerializer"
   SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER: "org.springframework.kafka.support.serializer.JsonSerializer"
   SPRING_KAFKA_TOPIC_INVENTORY_UPDATED: "inventory-updated"
-  SPRING_KAFKA_TOPIC_INBOUND_CONFIRMED: "inbound-confirmed-0"
+  #SPRING_KAFKA_TOPIC_INBOUND_CONFIRMED: "inbound-confirmed-0"
+  SPRING_KAFKA_TOPIC_INBOUND_CONFIRMED: "inbound-confirmed"
   SPRING_KAFKA_PRODUCER_ACKS: "all"
 
