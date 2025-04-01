@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: chamchimayo/user-service
-  tag: "latest"
+  tag: "v0.0.15"
   pullPolicy: IfNotPresent
 
 service:
@@ -16,5 +16,5 @@ env:
   DB_PASSWORD: user1
   DB_DRIVER: org.postgresql.Driver
   REDIS_CLUSTER_NODES: redis-cluster-headless.redis.svc.cluster.local:6379
-  REDIS_PASSWORD: YLVGtPhO7s
+  REDIS_PASSWORD: soldesk
   REDIS_PORT: 6379
